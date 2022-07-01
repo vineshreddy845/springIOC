@@ -1,0 +1,85 @@
+ -----------------------IOC CONTAINER- INVERSION CONTROLLER------------------------------------------------------
+ 1: With out touching source code , we can create objects using Spring IOC Container.
+ 2: In these case Spring framework says---> don't worry I can create objects for you and I can manage your objects.
+  
+                          -   I can create objects for you.
+                        -
+        springframework 
+                        -
+                          -   I can manage your objects.                   
+ 
+ 2: what is IOC Container?
+ 
+A: spring says you have Config file(XML)---> were you put all classes . which you want objects for that classes.
+  ** where spring have IOC container gets information from XML file --> where it create objects and manage objects in that IOC Container.
+    ***Config file(XML)****                                           *** IOC Container***
+  |-||||||||||||||||||||||                                           |||||||||||||||||||||||
+  |                      |                                              A(object)  
+  |  class A             |
+  |              class B |                                                        B(object)
+  |                      |     <-----------------------------------
+  |                      |
+  |  class C             |                                            c(object)                                              
+  |                      |                    
+  |                      |
+  ||||||||||||||||||||||||                                            ||||||||||||||||||||||||
+  
+  Spring Bean---> The spring creates and manage objects in IOC Container is called Spring bean.
+  =>suppose we want to use class A object. spring provides a method ----getBean("a")----in brackets just place --a-- .so that--a-- is tracking Class A object.
+  
+  There are two types of IOC Containers
+    1: Bean factory--->interface class
+    2:Application context---> interface class
+    
+    =>Bean factory and Application context are inerfaces.but we use more Application context because Application context has more features than Bean factory.
+    =>Application context is a interface so that we have implementation class for Application context.
+      Synatx:    ApplicationContext-->interface
+                      |
+                      |----implements
+                      |
+                 ClassPathXmlApplicationContext    
+        example:
+              ApplicationContext context= new ClassPathXmlApplicationContext("XMlfile.");
+      => suppose we create bean.xml file
+             ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml")                 
+                      |
+                     |
+                     |
+            Reads data from config file(xmlfile) and creates object.
+                                              
+    example: bean.xml
+     
+   synatx:  <bean id ="reference(any thing you can wirte)" class="packagename.classname"></bean>
+   example: <bean id="airtel" class="com.vinesh.ioc.Airtel"></bean> // In these case IOC container create object for Airtel class.
+                       |object name                   | mentioning here Airtel class It creates object with id airtel.By IOC Container.
+     
+      IOC container create object like these       Airtel airtel= new Airtel();
+                                                          |
+                                                          |
+                                                          ID
+                                                          
+    =>To get airtel object we use getBean("id")method.
+    Syntax: ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml")   
+       classname refrenceobjectname= context.getBean("refernceId",Classname.class)
+       // below we are storing object in to obj.
+       Airtel obj =context.getBean("airtel",Airtel.class);
+                   or
+       Airtel obj= (Airtel)context.getBean("airtel");            
+       obj.calling();
+       obj.data();
+       
+       
+   finally we use interface sim .so that we can change data in xml file.but not in source code
+   
+     sim s= context.getBean("sim1",sim.class);
+     s.calling();
+     s.data();    
+          
+                                                         
+      
+      
+      
+      
+      
+     
+                                                   
